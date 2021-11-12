@@ -1,11 +1,9 @@
 <template>
   <div>
     <b-row>
-      <Header />
+      <Head />
     </b-row>
-    <b-row
-      class="mt-5 mb-5"
-    >
+    <b-row>
       <Body />
     </b-row>
     <b-row
@@ -24,16 +22,16 @@
 </template>
 
 <script>
-import Header from '../components/About/AboutHeader.vue'
-import Body from '../components/About/AboutBody.vue'
+import Head from '../components/Contact-Us/Header.vue'
+import Body from '../components/Contact-Us/Body.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
-  name: 'AboutUs',
+  name: 'Contact-us',
   components: {
-    Header,
-    Footer,
-    Body
+    Head,
+    Body,
+    Footer
   }
 }
 </script>

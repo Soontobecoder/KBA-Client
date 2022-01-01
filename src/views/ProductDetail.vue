@@ -44,7 +44,8 @@
       />
     </b-row>
     <b-row style="background-color: #212529;">
-      <p class="mb-0 mt-5" style='font-family: "Segoe UI"; color: white; text-align:center; font-size:32px'> Pilihan warna
+      <p class="mb-0 mt-5" style='font-family: "Segoe UI"; color: white; text-align:center; font-size:32px'>
+        Pilihan warna
       </p>
       <Header
         :Product="product"

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-card body-class="text-center" header-tag="nav">
-      <h1 class="display-4 mb-3">Temukan motor idamanmu</h1>
+    <b-card body-class="text-center" header-tag="nav" style="z-index: 1;">
+      <h1 class="display-4 mb-3" id="Title">Temukan motor idamanmu</h1>
       <hr />
       <b-tabs content-class="mt-3" justified
         active-nav-item-class="font-weight-bold text-secondary"
@@ -162,5 +162,7 @@ export default {
 .bv-no-focus-ring.col-form-label.pt-0 {
   text-align: left;
 }
-
+#Title {
+  font-family: 'Oswald', sans-serif;
+}
 </style>

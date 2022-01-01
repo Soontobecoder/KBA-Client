@@ -14,12 +14,12 @@
       id="filter"
     >
       <b-col
-        class="mt-5"
+        class="mt-n5"
         xl="12"
       >
         <FilterCard
           class="mx-auto Filter"
-          style="max-width: 60%"
+          style="max-width: 60%;"
         />
       </b-col>
     </b-row>
@@ -155,6 +155,7 @@ export default {
 @media only screen and (max-width: 1200px) {
   .Filter {
     max-width: 100% !important;
+    margin-top: 50px;
   }
   .Advantages {
     max-width: 100% !important;

@@ -119,9 +119,9 @@ export default {
   data () {
     return {
       formSpek: {
-        kapasitas_mesin: '',
-        transmisi: '',
-        SSBB: ''
+        kapasitas_mesin: null,
+        transmisi: null,
+        SSBB: null
       },
       cc: [{ value: null, text: 'Select an option' }, '110 cc', '125 cc', '150 cc'],
       tipe: [{ value: null, text: 'Select an option' }, 'manual', 'otomatis'],
@@ -137,13 +137,16 @@ export default {
   methods: {
     onReset () {
       this.formSpek = {
-        kapasitas_mesin: '',
-        transmisi: '',
-        SSBB: ''
+        kapasitas_mesin: null,
+        transmisi: null,
+        SSBB: null
       }
     },
     submitSpek () {
-      console.log(this.formSpek)
+      // console.log(this.formSpek)
+      this.$store.dispatch('getProducts')
+      this.$store.dispatch('submitForm', this.formSpek)
+      this.$router.push({ path: '/products', replace: true })
     },
     submitHarga () {
       console.log(this.formHarga)

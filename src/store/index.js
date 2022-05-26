@@ -9,7 +9,8 @@ export default new Vuex.Store({
     banners: [],
     products: [],
     leasings: [],
-    breadCrumbs: [{ text: 'Home', href: '/' }]
+    breadCrumbs: [{ text: 'Home', href: '/' }],
+    formSpek: {}
   },
   mutations: {
     SET_BANNERS (state, payload) {
@@ -25,6 +26,10 @@ export default new Vuex.Store({
     SET_BREADCRUMBS (state, payload) {
       state.breadCrumbs = [{ text: 'Home', href: '/' }]
       state.breadCrumbs.push(payload)
+    },
+    SET_FORMSPEK (state, payload) {
+      console.log(payload, 'this comes from store')
+      state.formSpek = payload
     },
     ADD_BREADCRUMBS (state, payload) {
       state.breadCrumbs = [{ text: 'Home', href: '/' }, { text: 'Products', href: '/products' }]
@@ -46,7 +51,7 @@ export default new Vuex.Store({
         console.log(error)
       }
     },
-    async getProducts (context) {
+    async getProducts (context, payload) {
       try {
         const response = await axios({
           method: 'get',
@@ -59,6 +64,9 @@ export default new Vuex.Store({
       } catch (error) {
         console.log(error)
       }
+    },
+    async submitForm (context, payload) {
+      context.commit('SET_FORMSPEK', payload)
     },
     async getLeasings (context) {
       try {
@@ -103,30 +111,54 @@ export default new Vuex.Store({
   getters: {
     cub: state => {
       if (state.products) {
-        return state.products.filter(el => {
-          return el.tipeMesin === 'cub'
-        })
+        if (state.formSpek) {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'cub'
+          })
+        } else {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'cub'
+          })
+        }
       }
     },
     matic: state => {
       if (state.products) {
-        return state.products.filter(el => {
-          return el.tipeMesin === 'matic'
-        })
+        if (state.formSpek) {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'matic' // && el.name === 'Beat Sporty CBS'
+          })
+        } else {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'matic'
+          })
+        }
       }
     },
     premium: state => {
       if (state.products) {
-        return state.products.filter(el => {
-          return el.tipeMesin === 'premium'
-        })
+        if (state.formSpek) {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'premium'
+          })
+        } else {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'premium'
+          })
+        }
       }
     },
     sport: state => {
       if (state.products) {
-        return state.products.filter(el => {
-          return el.tipeMesin === 'sport'
-        })
+        if (state.formSpek) {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'sport'
+          })
+        } else {
+          return state.products.filter(el => {
+            return el.tipeMesin === 'sport'
+          })
+        }
       }
     }
   },

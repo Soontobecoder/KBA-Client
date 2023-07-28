@@ -23,3 +23,4 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 # KBA-Client
+for the server, please refer to this link https://github.com/Soontobecoder/kba-server

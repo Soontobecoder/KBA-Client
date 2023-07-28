@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-img style="width: 100%" src="https://hondajabodetabek.com/wp-content/uploads/2020/08/bg-banner-top-crf250-1-e1508487304676.jpg" fluid alt="Responsive image"></b-img>
+    <!-- <b-img style="width: 100%" src="https://hondajabodetabek.com/wp-content/uploads/2020/08/bg-banner-top-crf250-1-e1508487304676.jpg" fluid alt="Responsive image"></b-img> -->
   </div>
 </template>
 

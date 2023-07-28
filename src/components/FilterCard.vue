@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card body-class="text-center" header-tag="nav" style="z-index: 1;">
-      <h1 class="display-4 mb-3" id="Title">Temukan motor idamanmu</h1>
+      <h1 style="font-family: 'Rajdhani" class="display-4 mb-3" id="Title">Temukan motor idamanmu</h1>
       <hr />
       <b-tabs content-class="mt-3" justified
         active-nav-item-class="font-weight-bold text-secondary"
@@ -58,32 +58,18 @@
             <p style="color:black;">Berdasarkan Harga</p>
           </template>
           <b-form @submit.prevent="submitHarga">
-            <!-- <b-row>
-              <b-col
-                sm="5"
-                style="margin:0;"
-              >
-                <p class="lead" style="text-align:left; margin-bottom:1px">Minimum Price : Rp {{ valueMin }},00</p>
-              </b-col>
-              <b-col
-                sm="5"
-                style="margin:0;"
-              >
-                <p class="lead" style="text-align:left; margin-bottom:1px">Maximum Price : Rp {{ valueMax }},00</p>
-              </b-col>
-            </b-row> -->
             <b-row>
               <b-col
                 sm="5"
               >
                 <p class="lead" style="text-align:left; margin-bottom:1px">Minimum Price : Rp {{ valueMin }},00</p>
-                <b-form-input v-model="formHarga.hargaMin" @input="separatorMin" step="1000" type="range" min="0" :max="formHarga.hargaMax"></b-form-input>
+                <b-form-input v-model="formHarga.hargaMin" @input="separatorMin" step="10000" type="range" min="0" :max="formHarga.hargaMax"></b-form-input>
               </b-col>
               <b-col
                 sm="5"
               >
                 <p class="lead" style="text-align:left; margin-bottom:1px">Maximum Price : Rp {{ valueMax }},00</p>
-                <b-form-input v-model="formHarga.hargaMax" @input="separatorMax" step="1000" type="range" :min="formHarga.hargaMin" max="100000000"></b-form-input>
+                <b-form-input v-model="formHarga.hargaMax" @input="separatorMax" step="10000" type="range" :min="formHarga.hargaMin" max="100000000"></b-form-input>
               </b-col>
               <b-col
                 sm="2"
@@ -113,26 +99,26 @@
 
 export default {
   name: 'filterCard',
-  // components: {
-  //   Money
-  // },
   data () {
     return {
       formSpek: {
-        kapasitas_mesin: null,
-        transmisi: null,
-        SSBB: null
+        kapasitas_mesin: this.$store.state.formSpek.kapasitas_mesin,
+        transmisi: this.$store.state.formSpek.transmisi,
+        SSBB: this.$store.state.formSpek.SSBB
       },
       cc: [{ value: null, text: 'Select an option' }, '110 cc', '125 cc', '150 cc'],
-      tipe: [{ value: null, text: 'Select an option' }, 'manual', 'otomatis'],
+      tipe: [{ value: null, text: 'Select an option' }, 'manual', 'automatic'],
       ssbb: [{ value: null, text: 'Select an option' }, 'PGM-FI'],
       formHarga: {
-        hargaMin: 0,
-        hargaMax: 100000000
+        hargaMin: this.$store.state.harga.hargaMin,
+        hargaMax: this.$store.state.harga.hargaMax
       },
-      valueMin: 0,
-      valueMax: 100000000
+      valueMin: this.$store.state.harga.hargaMin,
+      valueMax: this.$store.state.harga.hargaMax
     }
+  },
+  created () {
+    this.formSpek = this.$store.state.formSpek
   },
   methods: {
     onReset () {
@@ -141,15 +127,22 @@ export default {
         transmisi: null,
         SSBB: null
       }
+      this.$store.dispatch('submitForm', this.formSpek)
     },
     submitSpek () {
-      // console.log(this.formSpek)
       this.$store.dispatch('getProducts')
+      this.$store.dispatch('subHarga', {
+        hargaMin: 0,
+        hargaMax: 100000000
+      })
       this.$store.dispatch('submitForm', this.formSpek)
       this.$router.push({ path: '/products', replace: true })
     },
     submitHarga () {
-      console.log(this.formHarga)
+      this.$store.dispatch('submitForm', {})
+      this.$store.dispatch('getProducts')
+      this.$store.dispatch('subHarga', this.formHarga)
+      this.$router.push({ path: '/products', replace: true })
     },
     separatorMin () {
       this.valueMin = this.formHarga.hargaMin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')

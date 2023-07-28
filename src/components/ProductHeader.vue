@@ -8,7 +8,7 @@
           </b-col>
           <b-col class="my-auto mt-2 Text" style="width:100%">
             <p style="font-family: 'Manrope', sans-serif; font-weight:extra-bold;"> Simulasi Kredit </p>
-            <p style="font-family: 'Manrope', sans-serif; font-weight:bold;"><u> Lebih Lanjut </u> </p>
+            <p style="font-family: 'Manrope', sans-serif; font-weight:bold;"><u><router-link style="color:black" to="/sim-kredit"> Lebih Lanjut </router-link></u> </p>
           </b-col>
         </b-row>
       </md-content>
@@ -44,7 +44,12 @@
 
 <script>
 export default {
-  name: 'product-Header'
+  name: 'product-Header',
+  computed: {
+    formSpek () {
+      return this.$store.getters.formSpek
+    }
+  }
 }
 </script>
 

@@ -63,7 +63,7 @@
       xl="6"
     >
       <h1 style="color:red;"> Informasi Kontak kami </h1>
-      <footer class="blockquote-footer mb-4" style="font-size: 18px">Informasi kontak kami bila anda ingin mengunjungi atau menghubungi kami langsung</footer>
+      <footer class="blockquote-footer mb-4 mt-1" style="font-size: 18px">Klik disini</footer>
       <b-row>
         <b-col
           cols="2"

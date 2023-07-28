@@ -10,7 +10,11 @@ export default new Vuex.Store({
     products: [],
     leasings: [],
     breadCrumbs: [{ text: 'Home', href: '/' }],
-    formSpek: {}
+    formSpek: {},
+    harga: {
+      hargaMin: 0,
+      hargaMax: 1000000000
+    }
   },
   mutations: {
     SET_BANNERS (state, payload) {
@@ -19,6 +23,9 @@ export default new Vuex.Store({
     SET_PRODUCTS (state, payload) {
       state.products = payload
       console.log(payload, 'ini productsnya')
+    },
+    SET_HARGA (state, payload) {
+      state.harga = payload
     },
     SET_LEASINGS (state, payload) {
       state.leasings = payload
@@ -37,6 +44,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    subHarga (context, payload) {
+      context.commit('SET_HARGA', payload)
+    },
     async getBanners (context) {
       try {
         const response = await axios({
@@ -65,7 +75,7 @@ export default new Vuex.Store({
         console.log(error)
       }
     },
-    async submitForm (context, payload) {
+    submitForm (context, payload) {
       context.commit('SET_FORMSPEK', payload)
     },
     async getLeasings (context) {
@@ -110,55 +120,107 @@ export default new Vuex.Store({
   },
   getters: {
     cub: state => {
+      let bikes = []
       if (state.products) {
-        if (state.formSpek) {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'cub'
+        bikes = state.products.filter(el => {
+          return el.jenisMotor === 'cub'
+        })
+        if (state.formSpek.kapasitas_mesin) {
+          bikes = bikes.filter(el => {
+            return el.volumeLangkah === state.formSpek.kapasitas_mesin
           })
-        } else {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'cub'
+        } if (state.formSpek.transmisi) {
+          bikes = bikes.filter(el => {
+            return el.tipeMesin === state.formSpek.transmisi
+          })
+        } if (state.formSpek.SSBB) {
+          bikes = bikes.filter(el => {
+            return el.sistemSuplaiBahanBakar === state.formSpek.SSBB
+          })
+        } if (state.harga.hargaMin && state.harga.hargaMax) {
+          bikes = bikes.filter(el => {
+            return el.price <= state.harga.hargaMax && el.price >= state.harga.hargaMin
           })
         }
+        return bikes
       }
     },
     matic: state => {
+      let bikes = []
       if (state.products) {
-        if (state.formSpek) {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'matic' // && el.name === 'Beat Sporty CBS'
+        bikes = state.products.filter(el => {
+          return el.jenisMotor === 'matic'
+        })
+        if (state.formSpek.kapasitas_mesin) {
+          bikes = bikes.filter(el => {
+            return el.volumeLangkah === state.formSpek.kapasitas_mesin
           })
-        } else {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'matic'
+        } if (state.formSpek.transmisi) {
+          bikes = bikes.filter(el => {
+            return el.tipeMesin === state.formSpek.transmisi
+          })
+        } if (state.formSpek.SSBB) {
+          bikes = bikes.filter(el => {
+            return el.sistemSuplaiBahanBakar === state.formSpek.SSBB
+          })
+        } if (state.harga.hargaMin && state.harga.hargaMax) {
+          bikes = bikes.filter(el => {
+            return el.price <= state.harga.hargaMax && el.price >= state.harga.hargaMin
           })
         }
+        return bikes
       }
     },
     premium: state => {
+      let bikes = []
       if (state.products) {
-        if (state.formSpek) {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'premium'
+        bikes = state.products.filter(el => {
+          return el.jenisMotor === 'premium'
+        })
+        if (state.formSpek.kapasitas_mesin) {
+          bikes = bikes.filter(el => {
+            return el.volumeLangkah === state.formSpek.kapasitas_mesin
           })
-        } else {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'premium'
+        } if (state.formSpek.transmisi) {
+          bikes = bikes.filter(el => {
+            return el.tipeMesin === state.formSpek.transmisi
+          })
+        } if (state.formSpek.SSBB) {
+          bikes = bikes.filter(el => {
+            return el.sistemSuplaiBahanBakar === state.formSpek.SSBB
+          })
+        } if (state.harga.hargaMin && state.harga.hargaMax) {
+          bikes = bikes.filter(el => {
+            return el.price <= state.harga.hargaMax && el.price >= state.harga.hargaMin
           })
         }
+        return bikes
       }
     },
     sport: state => {
+      let bikes = []
       if (state.products) {
-        if (state.formSpek) {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'sport'
+        bikes = state.products.filter(el => {
+          return el.jenisMotor === 'sport'
+        })
+        if (state.formSpek.kapasitas_mesin) {
+          bikes = bikes.filter(el => {
+            return el.volumeLangkah === state.formSpek.kapasitas_mesin
           })
-        } else {
-          return state.products.filter(el => {
-            return el.tipeMesin === 'sport'
+        } if (state.formSpek.transmisi) {
+          bikes = bikes.filter(el => {
+            return el.tipeMesin === state.formSpek.transmisi
+          })
+        } if (state.formSpek.SSBB) {
+          bikes = bikes.filter(el => {
+            return el.sistemSuplaiBahanBakar === state.formSpek.SSBB
+          })
+        } if (state.harga.hargaMin && state.harga.hargaMax) {
+          bikes = bikes.filter(el => {
+            return el.price <= state.harga.hargaMax && el.price >= state.harga.hargaMin
           })
         }
+        return bikes
       }
     }
   },

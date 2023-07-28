@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Detail from '../views/ProductDetail.vue'
 import Contact from '../views/Contact.vue'
 import Order from '../views/Order.vue'
+import Sim from '../views/SimulasiKredit.vue'
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,11 @@ const routes = [
     component: Order
   },
   {
+    path: '/sim-kredit',
+    name: 'Simulasi Kredit',
+    component: Sim
+  },
+  {
     path: '/404',
     name: 'NotFound',
     meta: {
@@ -62,7 +68,7 @@ const router = new VueRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-//   // if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+//   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
 //   if (to.name !== 'Home' || to.name !== 'Our Dealer' || to.name !== 'Product' || to.name !== 'Home') next({ name: 'Login' })
 //   else next()
 // })

@@ -33,11 +33,11 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="mx-auto" style="font-size: 20px">
-          <b-nav-item href="#" active><router-link to="/" class="nav-link" >Home </router-link><span class="sr-only">(current)</span></b-nav-item>
+          <b-nav-item href="#" :active="tab == 'home'" @click="tab = 'home'"><router-link to="/" class="nav-link" >Home </router-link><span class="sr-only">(current)</span></b-nav-item>
           <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
-          <b-nav-item><router-link to="/products" class="nav-link" >Products </router-link> <span class="sr-only">(current)</span></b-nav-item>
-          <b-nav-item><router-link to="/our-dealer" class="nav-link" >Dealer</router-link> <span class="sr-only">(current)</span></b-nav-item>
-          <b-nav-item class="bordered" style="border-right: 1px solid white;"><router-link to="/contact" class="nav-link" >Contact us <span class="sr-only">(current)</span></router-link></b-nav-item>
+          <b-nav-item :active="tab === 'products'" @click="tab = 'products'"><router-link to="/products" class="nav-link" >Products </router-link> <span class="sr-only">(current)</span></b-nav-item>
+          <b-nav-item :active="tab === 'dealer'" @click="tab = 'dealer'"><router-link to="/our-dealer" class="nav-link" >Dealer</router-link> <span class="sr-only">(current)</span></b-nav-item>
+          <b-nav-item :active="tab === 'contact'" @click="tab = 'contact'" class="bordered" style="border-right: 1px solid white;"><router-link to="/contact" class="nav-link" >Contact us <span class="sr-only">(current)</span></router-link></b-nav-item>
           <b-dropdown v-if="this.$route.name != 'Home'" variant="danger" toggle-class="text-decoration-none" no-caret  class="m-md-2">
             <template #button-content>
               <MenuIcon title="open menu" :size="24"/>
@@ -135,7 +135,8 @@ export default {
   data () {
     return {
       search: '',
-      visible: false
+      visible: false,
+      tab: 'home'
     }
   },
   components: {
